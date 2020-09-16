@@ -1,0 +1,25 @@
+void setup()                                           # To initialise variables, pin modes,libraries
+{
+  pinMode(13,OUTPUT);                                  # Digital pin of arduino is connected to LED(Output)
+   pinMode(11,OUTPUT);                                 # Digital pin of arduino is connected to Buzzer(Output)
+   pinMode(8,INPUT);                                   # Digital pin of arduino is connected to Sensor(Input)
+  Serial.begin(9600);                                  # Sets the data rate in bits per second (baud) for serial data transmission
+}
+void loop()
+{
+  int sensorvalue = digitalRead(8);
+   if( sensorvalue == HIGH)                            # If motion is detected                        
+   {
+     digitalWrite(11,1);                               # Buzzer buzzes
+     tone(11,1000);
+     digitalWrite(13,1);                               # LED turns ON
+     noTone(11);
+     Serial.println("Alert! Movement Found");          # Reads message when motion is detected    
+   }
+  else
+  {
+    digitalWrite(11,0);
+    digitalWrite(13,0);
+  }
+  delay(10);             
+}
